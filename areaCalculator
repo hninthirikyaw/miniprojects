@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Area Calc</title>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class=" m-5 border p-4 " >
+            <h3 class="d-inline-block me-auto">Area Calculator</h3>
+                <hr>
+            <div class=" d-flex justify-content-between">
+               <div>
+                <span>Result: </span>
+                <span id="area"></span>
+               </div>
+                <div>
+                    <button id="store" class=" btn btn-outline-primary">Store</button>
+                    <button id="clear" class=" btn btn-outline-danger">Clear</button>
+                </div>
+            </div>
+            <form action="" id="Form" class=" form">
+                <div class="row  my-3">
+                    <div class="col-4">
+                        <input class=" form-control" type="number" id="width" placeholder="Width" required>
+                    </div>
+                    <div class="col-4">
+                        <input class=" form-control" type="number" id="breadth" placeholder="Breadth" required>
+                    </div>
+                    <div class="col-4">
+                        <button id="calc" class=" btn btn-primary">Calculate</button>
+                    </div>
+                </div>
+            </form>
+            <table class=" table my-4">
+                <thead>
+                    <tr>
+                        <th>Width</th>
+                        <th>Breadth</th>
+                        <th>Area</th>
+                    </tr>
+                </thead>
+                <tbody id="list">
+                    
+                </tbody>
+            </table>
+        </div>
+       
+    </div>
+
+    <script>
+        const width = document.getElementById("width");
+        const breadth = document.getElementById("breadth");
+        const area = document.getElementById("area");
+        const calc = document.getElementById("calc");
+        const store = document.getElementById("store");
+        const clear = document.getElementById("clear");
+        const list = document.getElementById("list");
+        const Form = document.getElementById("Form");
+
+        
+
+        calc.addEventListener("click",function(event){
+            event.preventDefault();
+            area.innerHTML = `${width.value * breadth.value} ft<sup>2</sup>`;
+        });
+
+        clear.addEventListener("click", function(){
+            if(confirm("Are you sure to delete?")){
+                area.innerHTML = null;
+                // width.value = breadth.value = null;
+                Form.reset(); 
+            };
+        });
+
+        store.addEventListener("click",function(){
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+                <td>${width.value} ft</td>
+                <td>${breadth.value} ft</td>
+                <td>${area.innerHTML}</td>
+            `;
+            list.append(tr);
+            // area.innerHTML =null;
+            // Form.reset();
+            clear();
+        });
+
+    </script>
+    
+</body>
+</html>
